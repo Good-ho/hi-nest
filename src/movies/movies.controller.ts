@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -39,14 +40,11 @@ export class MoviesController {
 
   @Delete('/:id')
   delete(@Param('id') id: string) {
-    return this.moviesService.deleteOne(id);
+    this.moviesService.deleteOne(id);
   }
 
   @Patch('/:id')
   patch(@Param('id') id: string, @Body() updateDate) {
-    return {
-      updateMovie: id,
-      ...updateDate,
-    };
+    return this.moviesService.update(id, updateDate);
   }
 }
