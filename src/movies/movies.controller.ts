@@ -3,17 +3,15 @@ import {
   Controller,
   Delete,
   Get,
-  NotFoundException,
   Param,
   Patch,
   Post,
   Query,
 } from '@nestjs/common';
-import { identity } from 'rxjs';
-import { CreateMovieDto } from 'src/dto/create-movie.dto';
-import { UpdateMovieDto } from 'src/dto/update-movie.dto';
-import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
+import { Movie } from './entities/movie.entity';
+import { CreateMovieDto } from '../dto/create-movie.dto';
+import { UpdateMovieDto } from '../dto/update-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
