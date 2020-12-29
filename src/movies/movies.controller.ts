@@ -1,11 +1,12 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
-  Put,
+  Query,
 } from '@nestjs/common';
 import { identity } from 'rxjs';
 
@@ -16,13 +17,19 @@ export class MoviesController {
     return 'This will return all movies';
   }
 
+  @Get('/search')
+  search(@Query('year') year: string) {
+    return `We are searching a movie made after ${year}`;
+  }
+
   @Get('/:id')
   getOne(@Param('id') id: string) {
     return `This will return one movie with the ${id}`;
   }
 
   @Post()
-  create() {
+  create(@Body() movieData) {
+    console.log(movieData);
     return 'This will create a movie';
   }
 
@@ -32,7 +39,10 @@ export class MoviesController {
   }
 
   @Patch('/:id')
-  patch(@Param('id') id: string) {
-    return `This will patch a movie with the id : ${id}`;
+  patch(@Param('id') id: string, @Body() updateDate) {
+    return {
+      updateMovie: id,
+      ...updateDate,
+    };
   }
 }
